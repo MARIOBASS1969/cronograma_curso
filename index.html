@@ -132,9 +132,10 @@
   label{
     margin-left:15px;
     font-size:.75rem;
+    font-weight:bold;
     text-transform:uppercase;
     letter-spacing:.06em;
-    color:var(--ink-soft);
+    color:black;
     font-family:'IBM Plex Mono', monospace;
   }
   input[type=text], input[type=date], input[type=month]{
@@ -412,8 +413,8 @@
       </div>
       <div class="field grow">
         <label for="f-desc">Descrição</label>
-        <input type="text" id="f-desc" placeholder="Digite Rural ou IFRN", dpois a dscrição> 
-      </div>
+        <input type="text" id="f-desc" placeholder="Digite Rural ou IFRN, depois Descrição> 
+      </div>",
       <div class="field" style="flex:0 0 auto;">
         <button class="btn-primary" id="f-save">Adicionar tarefa</button>
       </div>
@@ -434,7 +435,7 @@
       <input type="text" id="days-filter" inputmode="numeric" placeholder="Ex.: 10">
     </div>
     <div class="field">
-      <label for="month-filter">Mês</label>
+      <label for="month-filter">Por Mês</label>
       <input type="month" id="month-filter">
     </div>
     <button class="btn-ghost" id="btn-clear-period">Limpar período</button>
