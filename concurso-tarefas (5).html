@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cronograma do Concurso</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f6f1e7;
+    --paper-dark:#efe7d6;
+    --ink:#2b2620;
+    --ink-soft:#5c5347;
+    --line:#c9bda3;
+    --accent:#7a4a2b;
+    --accent2:#8a6d3b;
+    --green:#3f6b4a;
+    --green-bg:#e4ede2;
+    --red:#8c3b32;
+    --red-bg:#f3e3df;
+    --amber:#a3711d;
+    --amber-bg:#f3e6cf;
+    --card:#fffdf8;
+    --shadow: 0 2px 6px rgba(43,38,32,0.08), 0 1px 2px rgba(43,38,32,0.06);
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#1d1a15;
+      --paper-dark:#25211a;
+      --ink:#eee6d6;
+      --ink-soft:#b9ac95;
+      --line:#4a4234;
+      --accent:#d99a63;
+      --accent2:#c9ab6f;
+      --green:#8fbf9c;
+      --green-bg:#20302a;
+      --red:#d98f85;
+      --red-bg:#332321;
+      --amber:#e0b972;
+      --amber-bg:#332a1a;
+      --card:#27231c;
+      --shadow: 0 2px 8px rgba(0,0,0,0.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#1d1a15;
+    --paper-dark:#25211a;
+    --ink:#eee6d6;
+    --ink-soft:#b9ac95;
+    --line:#4a4234;
+    --accent:#d99a63;
+    --accent2:#c9ab6f;
+    --green:#8fbf9c;
+    --green-bg:#20302a;
+    --red:#d98f85;
+    --red-bg:#332321;
+    --amber:#e0b972;
+    --amber-bg:#332a1a;
+    --card:#27231c;
+    --shadow: 0 2px 8px rgba(0,0,0,0.35);
+  }
+  html,body{height:100%;}
+  html{scroll-padding-top:env(safe-area-inset-top,0px);}
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    background-image:
+      linear-gradient(var(--paper-dark) 1px, transparent 1px);
+    background-size: 100% 2.1rem;
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    font-size:16px;
+    line-height:1.5;
+    min-height:100%;
+    padding:1.5rem 1rem 3rem;
+  }
+  .wrap{ max-width:720px; margin:0 auto; }
+  header{
+    text-align:center;
+    margin-bottom:1.5rem;
+  }
+  header h1{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    font-size:1.7rem;
+    margin:0 0 .2rem;
+    letter-spacing:.01em;
+  }
+  header p{
+    margin:0;
+    color:var(--ink-soft);
+    font-size:.9rem;
+    font-family:'IBM Plex Mono', monospace;
+  }
+  .panel{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    box-shadow:var(--shadow);
+    padding:1.1rem;
+    margin-bottom:1.1rem;
+  }
+  .panel h2{
+    font-family:'Fraunces', serif;
+    font-size:1.05rem;
+    margin:0 0 .8rem;
+    font-weight:600;
+    color:var(--accent);
+  }
+  .field-row{
+    display:flex;
+    gap:.6rem;
+    flex-wrap:wrap;
+    align-items:flex-end;
+  }
+  :root{ --field-w: 260px; }
+  .field{
+    display:flex;
+    flex-direction:column;
+    gap:.3rem;
+    flex:0 0 var(--field-w);
+    width:var(--field-w);
+  }
+  .field.grow{ flex:0 0 var(--field-w); width:var(--field-w); }
+  .field.field-narrow{ flex:0 0 calc(var(--field-w) * 0.4); width:calc(var(--field-w) * 0.4); }
+  label{
+    margin-left:15px;
+    font-size:.75rem;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    color:var(--ink-soft);
+    font-family:'IBM Plex Mono', monospace;
+  }
+  input[type=text], input[type=date], input[type=month]{
+    margin-left: 13px;
+    font-family:'Inter', sans-serif;
+    font-size:.95rem;
+    padding:.55rem .6rem;
+    border:1px solid var(--line);
+    border-radius:7px;
+    background:var(--paper);
+    color:var(--ink);
+    width:100%;
+    box-sizing:border-box;
+  }
+  input[type=text]:focus, input[type=date]:focus, input[type=month]:focus{
+    outline:2px solid var(--accent2);
+    outline-offset:1px;
+  }
+  button{
+    font-family:'Inter', sans-serif;
+    font-weight:600;
+    font-size:.9rem;
+    border:none;
+    border-radius:7px;
+    padding:.6rem 1rem;
+    cursor:pointer;
+    transition:transform .08s ease, filter .15s ease;
+  }
+  button:active{ transform:translateY(1px); }
+  .btn-primary{
+    background:var(--accent);
+    color:#fff8ee;
+  }
+  .btn-primary:hover{ filter:brightness(1.08); }
+  .btn-ghost{
+    margin-left:13px;
+    margin-bottom: 6px;
+    background:transparent;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+  }
+  .btn-ghost:hover{ background:var(--paper-dark); }
+  .btn-edit{
+    background:var(--amber-bg);
+    color:var(--amber);
+    padding:.4rem .7rem;
+    font-size:.8rem;
+  }
+  .btn-del{
+    background:var(--red-bg);
+    color:var(--red);
+    padding:.4rem .7rem;
+    font-size:.8rem;
+  }
+  .msg{
+    font-size:.82rem;
+    font-family:'IBM Plex Mono', monospace;
+    margin-top:.5rem;
+    min-height:1.1em;
+  }
+  .msg.err{ color:var(--red); }
+  .msg.ok{ color:var(--green); }
+
+  .toolbar{
+    background-color:rgb(183, 248, 226); ;
+    display:flex;
+    gap:.6rem;
+    flex-wrap:wrap;
+    margin-bottom:.7rem;
+    align-items:flex-end;
+  }
+  .toolbar .btn-ghost{ padding:.55rem .8rem; white-space:nowrap; align-self:flex-end; }
+  .chip-row{
+    display:flex;
+    gap:.4rem;
+    flex-wrap:wrap;
+  }
+  .chip{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.78rem;
+    padding:.35rem .7rem;
+    border-radius:999px;
+    border:1px solid var(--line);
+    background:var(--paper);
+    color:var(--ink-soft);
+    cursor:pointer;
+  }
+  .chip.active{
+    background:var(--accent);
+    color:#fff8ee;
+    border-color:var(--accent);
+  }
+
+  .lookup{
+    display:flex;
+    gap:.6rem;
+    flex-wrap:wrap;
+    align-items:flex-end;
+  }
+  .lookup-result{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.88rem;
+    margin-top:.6rem;
+    padding:.6rem .7rem;
+    border-radius:7px;
+    background:var(--paper-dark);
+    border:1px dashed var(--line);
+  }
+
+  .list{ display:flex; flex-direction:column; gap:.7rem; }
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    box-shadow:var(--shadow);
+    padding:.85rem .95rem;
+    display:flex;
+    gap:.8rem;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+  }
+  .card .info{
+    display:flex;
+    flex-direction:column;
+    gap:.15rem;
+    min-width:0;
+    flex:1 1 220px;
+  }
+  .card .desc{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.02rem;
+    overflow-wrap:anywhere;
+  }
+  .card .date-line{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.82rem;
+    color:var(--ink-soft);
+  }
+  .stamp{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.78rem;
+    font-weight:600;
+    padding:.3rem .6rem;
+    border-radius:999px;
+    white-space:nowrap;
+  }
+  .stamp.future{ background:var(--green-bg); color:var(--green); }
+  .stamp.today{ background:var(--amber-bg); color:var(--amber); animation:pulse 1.6s infinite; }
+  .stamp.past{ background:var(--red-bg); color:var(--red); }
+  @keyframes pulse{
+    0%,100%{ opacity:1; }
+    50%{ opacity:.55; }
+  }
+  .actions{ display:flex; gap:.4rem; }
+  .empty{
+    text-align:center;
+    color:var(--ink-soft);
+    font-family:'IBM Plex Mono', monospace;
+    padding:2rem 1rem;
+    font-size:.9rem;
+  }
+  footer{
+    text-align:center;
+    color:var(--ink-soft);
+    font-size:.75rem;
+    font-family:'IBM Plex Mono', monospace;
+    margin-top:2rem;
+  }
+
+  .columns{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1.1rem;
+    align-items:start;
+  }
+  @media (max-width: 620px){
+    .columns{ grid-template-columns:1fr; }
+  }
+  .column-head{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    font-size:1.1rem;
+    text-align:center;
+    padding:.4rem 0;
+    margin-bottom:.7rem;
+    border-bottom:2px solid var(--line);
+    color:var(--accent);
+  }
+  .column .list{ gap:.6rem; }
+
+  .toolbar-actions{
+    display:flex;
+    justify-content:flex-end;
+    margin-bottom:1rem;
+  }
+  .btn-print{
+    background:var(--accent2);
+    color:#fff8ee;
+  }
+  .btn-print:hover{ filter:brightness(1.08); }
+
+  @media print{
+    @page{
+      size: A4;
+      margin: 14mm;
+    }
+  }
+  @media print{
+    body{
+      background:#fff !important;
+      color:#000 !important;
+      font-size:12px;
+      padding:0;
+    }
+    .wrap{ max-width:190mm; margin:0 auto; }
+    .panel, .toolbar, .toolbar-actions, footer{ display:none !important; }
+    header h1{ color:#000; font-size:1.4rem; }
+    header p{ color:#333; }
+    .columns{ gap:6mm; }
+    .column-head{ color:#000; border-bottom-color:#000; }
+    .card{
+      box-shadow:none;
+      border:1px solid #999;
+      break-inside:avoid;
+      page-break-inside:avoid;
+      background:#fff !important;
+    }
+    .stamp.future{ background:#eee !important; color:#000 !important; border:1px solid #999; }
+    .stamp.today{ background:#eee !important; color:#000 !important; border:1px solid #999; animation:none !important; }
+    .stamp.past{ background:#eee !important; color:#000 !important; border:1px solid #999; }
+    .actions{ display:none !important; }
+    .desc, .date-line{ color:#000 !important; }
+    .empty{ color:#666 !important; }
+  }
+  body.print-preview{
+    background:#fff !important;
+    color:#000 !important;
+    font-size:14px;
+  }
+  body.print-preview .wrap{ max-width:190mm; margin:0 auto; box-shadow:0 0 0 1px #ccc, 0 8px 24px rgba(0,0,0,0.12); background:#fff; padding:14mm; }
+  body.print-preview .panel,
+  body.print-preview .toolbar,
+  body.print-preview footer{ display:none !important; }
+  body.print-preview .toolbar-actions{ justify-content:center; margin-bottom:1.2rem; }
+  body.print-preview header h1{ color:#000; }
+  body.print-preview header p{ color:#333; }
+  body.print-preview .column-head{ color:#000; border-bottom-color:#000; }
+  body.print-preview .card{
+    box-shadow:none;
+    border:1px solid #999;
+    background:#fff !important;
+  }
+  body.print-preview .stamp.future,
+  body.print-preview .stamp.today,
+  body.print-preview .stamp.past{ background:#eee !important; color:#000 !important; border:1px solid #999; animation:none !important; }
+  body.print-preview .actions{ display:none !important; }
+  body.print-preview .desc, body.print-preview .date-line{ color:#000 !important; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Cronograma do Concurso</h1>
+    <p>tarefas &middot; prazos &middot; contagem de dias</p>
+  </header>
+
+  <div class="panel">
+    <h2 id="form-title">Nova tarefa</h2>
+    <div class="field-row">
+      <div class="field">
+        <label for="f-date">Data</label>
+        <input type="date" id="f-date">
+      </div>
+      <div class="field grow">
+        <label for="f-desc">Descrição</label>
+        <input type="text" id="f-desc" placeholder="Digite Rural ou IFRN", dpois a dscrição> 
+      </div>
+      <div class="field" style="flex:0 0 auto;">
+        <button class="btn-primary" id="f-save">Adicionar tarefa</button>
+      </div>
+      <div class="field" style="flex:0 0 auto;" id="f-cancel-wrap" hidden>
+        <button class="btn-ghost" id="f-cancel">Cancelar edição</button>
+      </div>
+    </div>
+    <div class="msg" id="f-msg"></div>
+  </div>
+
+  <div class="toolbar">
+    <div class="field grow">
+      <label for="search">Filtrar por descrição</label>
+      <input type="text" id="search" placeholder="Ex.: prova, recurso...">
+    </div>
+    <div class="field field-narrow">
+      <label for="days-filter">Por dias</label>
+      <input type="text" id="days-filter" inputmode="numeric" placeholder="Ex.: 10">
+    </div>
+    <div class="field">
+      <label for="month-filter">Mês</label>
+      <input type="month" id="month-filter">
+    </div>
+    <button class="btn-ghost" id="btn-clear-period">Limpar período</button>
+  </div>
+  <div class="toolbar-actions">
+    <button class="btn-ghost" id="btn-preview">👁️ Visualizar impressão</button>
+    <button class="btn-print" id="btn-print">🖨️ Imprimir</button>
+  </div>
+
+  <div class="columns">
+    <div class="column">
+      <div class="column-head">RURAL</div>
+      <div class="list" id="list-rural"></div>
+      <div class="empty" id="empty-rural" hidden>Nenhuma tarefa encontrada.</div>
+    </div>
+    <div class="column">
+      <div class="column-head">UFRN</div>
+      <div class="list" id="list-ufrn"></div>
+      <div class="empty" id="empty-ufrn" hidden>Nenhuma tarefa encontrada.</div>
+    </div>
+  </div>
+
+  <footer>salvo automaticamente neste navegador (localStorage)</footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var STORAGE_KEY = "concursoTarefasV1";
+  var editingId = null;
+
+  function pad(n){ return String(n).padStart(2,"0"); }
+
+  // Parses "YYYY-MM-DD" as a local date at midnight (avoids UTC shift issues)
+  function parseISO(iso){
+    var parts = iso.split("-");
+    return new Date(parseInt(parts[0],10), parseInt(parts[1],10)-1, parseInt(parts[2],10));
+  }
+  function todayLocal(){
+    var t = new Date();
+    return new Date(t.getFullYear(), t.getMonth(), t.getDate());
+  }
+  function formatBR(iso){
+    if(!iso) return "";
+    var d = parseISO(iso);
+    return pad(d.getDate()) + "/" + pad(d.getMonth()+1) + "/" + d.getFullYear();
+  }
+  function diffDays(iso){
+    var d = parseISO(iso);
+    var t = todayLocal();
+    return Math.round((d - t) / 86400000);
+  }
+
+  function load(){
+    try{
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if(!raw) return null;
+      return JSON.parse(raw);
+    }catch(e){
+      console.error("Erro ao ler localStorage:", e);
+      return null;
+    }
+  }
+  function save(tasks){
+    try{
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+      return true;
+    }catch(e){
+      console.error("Erro ao salvar no localStorage:", e);
+      return false;
+    }
+  }
+
+  function seedData(){
+    return [
+      {id:"s1",  date:"2026-10-13", desc:"RURAL - Inscrições (pagamento até este dia)"},
+      {id:"s2",  date:"2026-10-20", desc:"RURAL - Homologações"},
+      {id:"s3",  date:"2026-10-29", desc:"RURAL - Anexar documentos pessoais + diplomas (Grad/Mest./Dout.) e RG - período 22 a 29/10, online"},
+      {id:"s4",  date:"2026-11-10", desc:"RURAL - Resultado da comprovação de pontuação"},
+      {id:"s5",  date:"2026-11-17", desc:"RURAL - Divulgação da banca examinadora"},
+      {id:"s6",  date:"2026-11-25", desc:"RURAL - Prova Escrita às 08h"},
+      {id:"s7",  date:"2026-11-30", desc:"RURAL - Resultado da Prova Escrita"},
+      {id:"s8",  date:"2026-12-02", desc:"RURAL - Recurso da Prova Escrita (dias 01 e 02/12)"},
+      {id:"s9",  date:"2026-12-09", desc:"RURAL - Resultado final da Prova Escrita / entrega do Plano de Trabalho + Currículo"},
+      {id:"s10", date:"2026-12-16", desc:"RURAL - Prova Didática (dias 14, 15 e 16/12)"},
+      {id:"s11", date:"2026-12-18", desc:"RURAL - Defesa do Plano de Trabalho (dias 17 e 18/12, mesma ordem da Didática)"},
+      {id:"s12", date:"2027-02-15", desc:"RURAL - Resultado da Prova Didática e do Plano de Trabalho"},
+
+      {id:"n1",  date:"2026-10-23", desc:"UFRN - Inscrições (28/09 a 23/10, pagamento até 29/10)"},
+      {id:"n2",  date:"2026-11-06", desc:"UFRN - Homologação das inscrições"},
+      {id:"n3",  date:"2026-11-11", desc:"UFRN - Recurso de homologação (dias 09 a 11/11)"},
+      {id:"n4",  date:"2026-11-12", desc:"UFRN - Relação definitiva"},
+      {id:"n5",  date:"2026-11-27", desc:"UFRN - Submissão online do MPAP + RG (dias 16 a 27/11)"},
+      {id:"n6",  date:"2026-11-30", desc:"UFRN - Resultado da análise dos documentos"},
+      {id:"n7",  date:"2026-12-14", desc:"UFRN - Divulgação das comissões"},
+      {id:"n8",  date:"2026-12-17", desc:"UFRN - Impugnação das comissões (3 dias úteis)"},
+      {id:"n9",  date:"2027-02-21", desc:"UFRN - Prova Escrita"},
+      {id:"n10", date:"2027-03-21", desc:"UFRN - Prova Didática (22/02 a 21/03) e entrega do MPAP/título/currículo"},
+      {id:"n11", date:"2027-03-24", desc:"UFRN - Heteroidentificação (dias 22 a 24/03)"},
+      {id:"n12", date:"2027-03-25", desc:"UFRN - Resultado da heteroidentificação"},
+      {id:"n13", date:"2027-03-29", desc:"UFRN - Lista única (PPPIA)"},
+      {id:"n14", date:"2027-03-30", desc:"UFRN - Resultado final"}
+    ];
+  }
+
+  var tasks = load();
+  if(tasks === null){
+    tasks = seedData();
+    save(tasks);
+  }
+
+  var listRuralEl = document.getElementById("list-rural");
+  var listUfrnEl = document.getElementById("list-ufrn");
+  var emptyRuralEl = document.getElementById("empty-rural");
+  var emptyUfrnEl = document.getElementById("empty-ufrn");
+  var searchEl = document.getElementById("search");
+  var daysFilterEl = document.getElementById("days-filter");
+  var monthFilterEl = document.getElementById("month-filter");
+  var btnClearPeriod = document.getElementById("btn-clear-period");
+  var btnPrint = document.getElementById("btn-print");
+  var fDate = document.getElementById("f-date");
+  var fDesc = document.getElementById("f-desc");
+  var fSave = document.getElementById("f-save");
+  var fCancelWrap = document.getElementById("f-cancel-wrap");
+  var fCancel = document.getElementById("f-cancel");
+  var fMsg = document.getElementById("f-msg");
+  var formTitle = document.getElementById("form-title");
+
+  function setMsg(text, kind){
+    fMsg.textContent = text || "";
+    fMsg.className = "msg" + (kind ? (" " + kind) : "");
+  }
+
+  function buildCard(t){
+    var days = diffDays(t.date);
+    var stampClass, stampText;
+    if(days === 0){
+      stampClass = "today"; stampText = "Hoje";
+    } else if(days > 0){
+      stampClass = "future"; stampText = "Faltam " + days + (days === 1 ? " dia" : " dias");
+    } else {
+      stampClass = "past"; stampText = "Passaram " + Math.abs(days) + (Math.abs(days) === 1 ? " dia" : " dias");
+    }
+
+    var card = document.createElement("div");
+    card.className = "card";
+
+    var info = document.createElement("div");
+    info.className = "info";
+    var desc = document.createElement("div");
+    desc.className = "desc";
+    desc.textContent = t.desc;
+    var dateLine = document.createElement("div");
+    dateLine.className = "date-line";
+    dateLine.textContent = formatBR(t.date);
+    info.appendChild(desc);
+    info.appendChild(dateLine);
+
+    var stamp = document.createElement("span");
+    stamp.className = "stamp " + stampClass;
+    stamp.textContent = stampText;
+
+    var actions = document.createElement("div");
+    actions.className = "actions";
+    var editBtn = document.createElement("button");
+    editBtn.className = "btn-edit";
+    editBtn.textContent = "Editar";
+    editBtn.addEventListener("click", function(){ startEdit(t.id); });
+    var delBtn = document.createElement("button");
+    delBtn.className = "btn-del";
+    delBtn.textContent = "Excluir";
+    delBtn.addEventListener("click", function(){ removeTask(t.id); });
+    actions.appendChild(editBtn);
+    actions.appendChild(delBtn);
+
+    card.appendChild(info);
+    card.appendChild(stamp);
+    card.appendChild(actions);
+    return card;
+  }
+
+  function getPeriodFilter(){
+    var daysVal = (daysFilterEl.value || "").trim();
+    if(daysVal !== "" && !isNaN(daysVal)){
+      var n = parseInt(daysVal, 10);
+      if(n < 0) n = 0;
+      return {
+        active: true,
+        test: function(t){
+          var d = diffDays(t.date);
+          return d >= 0 && d <= n;
+        }
+      };
+    }
+    var monthVal = monthFilterEl.value;
+    if(monthVal){
+      return {
+        active: true,
+        test: function(t){ return t.date.slice(0,7) === monthVal; }
+      };
+    }
+    return { active: false, test: function(){ return true; } };
+  }
+
+  function renderColumn(containerEl, emptyEl, groupFilterFn, term, period){
+    var sorted = tasks.slice().sort(function(a,b){
+      return a.date < b.date ? -1 : (a.date > b.date ? 1 : 0);
+    });
+    var filtered = sorted.filter(function(t){
+      var d = t.desc.toLowerCase();
+      if(!groupFilterFn(d)) return false;
+      if(term && d.indexOf(term) === -1) return false;
+      if(!period.test(t)) return false;
+      return true;
+    });
+    containerEl.innerHTML = "";
+    emptyEl.hidden = filtered.length !== 0;
+    emptyEl.textContent = period.active ? "Não há Informações nesse Período" : "Nenhuma tarefa encontrada.";
+    filtered.forEach(function(t){
+      containerEl.appendChild(buildCard(t));
+    });
+  }
+
+  function render(){
+    var term = (searchEl.value || "").trim().toLowerCase();
+    var period = getPeriodFilter();
+    renderColumn(listRuralEl, emptyRuralEl, function(d){ return d.indexOf("rural") !== -1; }, term, period);
+    renderColumn(listUfrnEl, emptyUfrnEl, function(d){ return d.indexOf("ufrn") !== -1; }, term, period);
+  }
+
+  function startEdit(id){
+    var t = tasks.find(function(x){ return x.id === id; });
+    if(!t) return;
+    editingId = id;
+    fDate.value = t.date;
+    fDesc.value = t.desc;
+    fSave.textContent = "Salvar edição";
+    formTitle.textContent = "Editando tarefa";
+    fCancelWrap.hidden = false;
+    setMsg("", "");
+    fDesc.focus();
+    window.scrollTo({top:0, behavior:"smooth"});
+  }
+
+  function resetForm(){
+    editingId = null;
+    fDate.value = "";
+    fDesc.value = "";
+    fSave.textContent = "Adicionar tarefa";
+    formTitle.textContent = "Nova tarefa";
+    fCancelWrap.hidden = true;
+  }
+
+  function removeTask(id){
+    if(!window.confirm("Excluir esta tarefa?")) return;
+    tasks = tasks.filter(function(t){ return t.id !== id; });
+    save(tasks);
+    if(editingId === id) resetForm();
+    render();
+  }
+
+  function genId(){
+    return "t" + Date.now() + Math.floor(Math.random()*1000);
+  }
+
+  fSave.addEventListener("click", function(){
+    var dateVal = fDate.value;
+    var descVal = fDesc.value.trim();
+    if(!dateVal){
+      setMsg("Informe uma data.", "err");
+      return;
+    }
+    if(!descVal){
+      setMsg("Informe uma descrição.", "err");
+      return;
+    }
+    if(editingId){
+      var t = tasks.find(function(x){ return x.id === editingId; });
+      if(t){
+        t.date = dateVal;
+        t.desc = descVal;
+      }
+      setMsg("Tarefa atualizada.", "ok");
+    } else {
+      tasks.unshift({ id: genId(), date: dateVal, desc: descVal });
+      setMsg("Tarefa adicionada.", "ok");
+    }
+    save(tasks);
+    resetForm();
+    render();
+    setTimeout(function(){ setMsg("",""); }, 2500);
+  });
+
+  fCancel.addEventListener("click", resetForm);
+
+  searchEl.addEventListener("input", render);
+
+  daysFilterEl.addEventListener("input", function(){
+    if(daysFilterEl.value.trim() !== ""){ monthFilterEl.value = ""; }
+    render();
+  });
+  monthFilterEl.addEventListener("input", function(){
+    if(monthFilterEl.value){ daysFilterEl.value = ""; }
+    render();
+  });
+  btnClearPeriod.addEventListener("click", function(){
+    daysFilterEl.value = "";
+    monthFilterEl.value = "";
+    render();
+  });
+
+  btnPrint.addEventListener("click", function(){
+    window.print();
+  });
+
+  var btnPreview = document.getElementById("btn-preview");
+  btnPreview.addEventListener("click", function(){
+    var on = document.body.classList.toggle("print-preview");
+    btnPreview.textContent = on ? "✕ Sair da visualização" : "👁️ Visualizar impressão";
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
