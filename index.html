@@ -104,8 +104,9 @@
     border-radius:10px;
     box-shadow:var(--shadow);
     padding:1.1rem;
-    margin-bottom:1.1rem;
+    margin-bottom:3rem;
   }
+
   .panel h2{
     font-family:'Fraunces', serif;
     font-size:1.05rem;
@@ -113,11 +114,16 @@
     font-weight:600;
     color:var(--accent);
   }
+
   .field-row{
     display:flex;
     gap:.6rem;
     flex-wrap:wrap;
-    align-items:flex-end;
+    /* align-items:flex-end; */
+
+    display: flex;
+    justify-content: center;
+    gap: 50px;
   }
   :root{ --field-w: 260px; }
   .field{
@@ -408,8 +414,8 @@
     <p>tarefas &middot; prazos &middot; contagem de dias</p>
   </header>
 
+  <h2 id="form-title">Nova tarefa</h2>
   <div class="panel">
-    <h2 id="form-title">Nova tarefa</h2>
     <div class="field-row">
       <div class="field">
         <label for="f-date">Data</label>
