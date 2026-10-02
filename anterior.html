@@ -129,24 +129,17 @@
   }
   .field.grow{ flex:0 0 var(--field-w); width:var(--field-w); }
   .field.field-narrow{ flex:0 0 calc(var(--field-w) * 0.4); width:calc(var(--field-w) * 0.4); }
-  .field-double{
-    display:flex;
-    flex-direction:column;
-    gap:.6rem;
-  }
-  .field-double .subfield{
-    display:flex;
-    flex-direction:column;
-    gap:.3rem;
-  }
   label{
+    margin-left:15px;
     font-size:.75rem;
+    font-weight:bold;
     text-transform:uppercase;
     letter-spacing:.06em;
-    color:var(--ink-soft);
+    color:black;
     font-family:'IBM Plex Mono', monospace;
   }
-  input[type=text], input[type=date], input[type=month], select{
+  input[type=text], input[type=date], input[type=month]{
+    margin-left: 13px;
     font-family:'Inter', sans-serif;
     font-size:.95rem;
     padding:.55rem .6rem;
@@ -157,7 +150,7 @@
     width:100%;
     box-sizing:border-box;
   }
-  input[type=text]:focus, input[type=date]:focus, input[type=month]:focus, select:focus{
+  input[type=text]:focus, input[type=date]:focus, input[type=month]:focus{
     outline:2px solid var(--accent2);
     outline-offset:1px;
   }
@@ -178,6 +171,8 @@
   }
   .btn-primary:hover{ filter:brightness(1.08); }
   .btn-ghost{
+    margin-left:13px;
+    margin-bottom: 6px;
     background:transparent;
     color:var(--ink-soft);
     border:1px solid var(--line);
@@ -205,6 +200,7 @@
   .msg.ok{ color:var(--green); }
 
   .toolbar{
+    background-color:rgb(183, 248, 226); ;
     display:flex;
     gap:.6rem;
     flex-wrap:wrap;
@@ -415,20 +411,10 @@
         <label for="f-date">Data</label>
         <input type="date" id="f-date">
       </div>
-      <div class="field grow field-double">
-        <div class="subfield">
-          <label for="f-cat">Instituição</label>
-          <select id="f-cat">
-            <option value="" disabled selected>Selecione...</option>
-            <option value="RURAL">RURAL</option>
-            <option value="UFRN">UFRN</option>
-          </select>
-        </div>
-        <div class="subfield">
-          <label for="f-desc">Descrição</label>
-          <input type="text" id="f-desc" placeholder="Ex.: Prova Escrita">
-        </div>
-      </div>
+      <div class="field grow">
+        <label for="f-desc">Descrição</label>
+        <input type="text" id="f-desc" placeholder="Digite Rural ou IFRN, depois Descrição> 
+      </div>",
       <div class="field" style="flex:0 0 auto;">
         <button class="btn-primary" id="f-save">Adicionar tarefa</button>
       </div>
@@ -445,11 +431,11 @@
       <input type="text" id="search" placeholder="Ex.: prova, recurso...">
     </div>
     <div class="field field-narrow">
-      <label for="days-filter">Próximos N dias</label>
+      <label for="days-filter">Por dias</label>
       <input type="text" id="days-filter" inputmode="numeric" placeholder="Ex.: 10">
     </div>
     <div class="field">
-      <label for="month-filter">Mês</label>
+      <label for="month-filter">Por Mês</label>
       <input type="month" id="month-filter">
     </div>
     <button class="btn-ghost" id="btn-clear-period">Limpar período</button>
@@ -525,33 +511,33 @@
 
   function seedData(){
     return [
-      {id:"s1",  date:"2026-10-13", categoria:"RURAL", desc:"RURAL - Inscrições (pagamento até este dia)"},
-      {id:"s2",  date:"2026-10-20", categoria:"RURAL", desc:"RURAL - Homologações"},
-      {id:"s3",  date:"2026-10-29", categoria:"RURAL", desc:"RURAL - Anexar documentos pessoais + diplomas (Grad/Mest./Dout.) e RG - período 22 a 29/10, online"},
-      {id:"s4",  date:"2026-11-10", categoria:"RURAL", desc:"RURAL - Resultado da comprovação de pontuação"},
-      {id:"s5",  date:"2026-11-17", categoria:"RURAL", desc:"RURAL - Divulgação da banca examinadora"},
-      {id:"s6",  date:"2026-11-25", categoria:"RURAL", desc:"RURAL - Prova Escrita às 08h"},
-      {id:"s7",  date:"2026-11-30", categoria:"RURAL", desc:"RURAL - Resultado da Prova Escrita"},
-      {id:"s8",  date:"2026-12-02", categoria:"RURAL", desc:"RURAL - Recurso da Prova Escrita (dias 01 e 02/12)"},
-      {id:"s9",  date:"2026-12-09", categoria:"RURAL", desc:"RURAL - Resultado final da Prova Escrita / entrega do Plano de Trabalho + Currículo"},
-      {id:"s10", date:"2026-12-16", categoria:"RURAL", desc:"RURAL - Prova Didática (dias 14, 15 e 16/12)"},
-      {id:"s11", date:"2026-12-18", categoria:"RURAL", desc:"RURAL - Defesa do Plano de Trabalho (dias 17 e 18/12, mesma ordem da Didática)"},
-      {id:"s12", date:"2027-02-15", categoria:"RURAL", desc:"RURAL - Resultado da Prova Didática e do Plano de Trabalho"},
+      {id:"s1",  date:"2026-10-13", desc:"RURAL - Inscrições (pagamento até este dia)"},
+      {id:"s2",  date:"2026-10-20", desc:"RURAL - Homologações"},
+      {id:"s3",  date:"2026-10-29", desc:"RURAL - Anexar documentos pessoais + diplomas (Grad/Mest./Dout.) e RG - período 22 a 29/10, online"},
+      {id:"s4",  date:"2026-11-10", desc:"RURAL - Resultado da comprovação de pontuação"},
+      {id:"s5",  date:"2026-11-17", desc:"RURAL - Divulgação da banca examinadora"},
+      {id:"s6",  date:"2026-11-25", desc:"RURAL - Prova Escrita às 08h"},
+      {id:"s7",  date:"2026-11-30", desc:"RURAL - Resultado da Prova Escrita"},
+      {id:"s8",  date:"2026-12-02", desc:"RURAL - Recurso da Prova Escrita (dias 01 e 02/12)"},
+      {id:"s9",  date:"2026-12-09", desc:"RURAL - Resultado final da Prova Escrita / entrega do Plano de Trabalho + Currículo"},
+      {id:"s10", date:"2026-12-16", desc:"RURAL - Prova Didática (dias 14, 15 e 16/12)"},
+      {id:"s11", date:"2026-12-18", desc:"RURAL - Defesa do Plano de Trabalho (dias 17 e 18/12, mesma ordem da Didática)"},
+      {id:"s12", date:"2027-02-15", desc:"RURAL - Resultado da Prova Didática e do Plano de Trabalho"},
 
-      {id:"n1",  date:"2026-10-23", categoria:"UFRN", desc:"UFRN - Inscrições (28/09 a 23/10, pagamento até 29/10)"},
-      {id:"n2",  date:"2026-11-06", categoria:"UFRN", desc:"UFRN - Homologação das inscrições"},
-      {id:"n3",  date:"2026-11-11", categoria:"UFRN", desc:"UFRN - Recurso de homologação (dias 09 a 11/11)"},
-      {id:"n4",  date:"2026-11-12", categoria:"UFRN", desc:"UFRN - Relação definitiva"},
-      {id:"n5",  date:"2026-11-27", categoria:"UFRN", desc:"UFRN - Submissão online do MPAP + RG (dias 16 a 27/11)"},
-      {id:"n6",  date:"2026-11-30", categoria:"UFRN", desc:"UFRN - Resultado da análise dos documentos"},
-      {id:"n7",  date:"2026-12-14", categoria:"UFRN", desc:"UFRN - Divulgação das comissões"},
-      {id:"n8",  date:"2026-12-17", categoria:"UFRN", desc:"UFRN - Impugnação das comissões (3 dias úteis)"},
-      {id:"n9",  date:"2027-02-21", categoria:"UFRN", desc:"UFRN - Prova Escrita"},
-      {id:"n10", date:"2027-03-21", categoria:"UFRN", desc:"UFRN - Prova Didática (22/02 a 21/03) e entrega do MPAP/título/currículo"},
-      {id:"n11", date:"2027-03-24", categoria:"UFRN", desc:"UFRN - Heteroidentificação (dias 22 a 24/03)"},
-      {id:"n12", date:"2027-03-25", categoria:"UFRN", desc:"UFRN - Resultado da heteroidentificação"},
-      {id:"n13", date:"2027-03-29", categoria:"UFRN", desc:"UFRN - Lista única (PPPIA)"},
-      {id:"n14", date:"2027-03-30", categoria:"UFRN", desc:"UFRN - Resultado final"}
+      {id:"n1",  date:"2026-10-23", desc:"UFRN - Inscrições (28/09 a 23/10, pagamento até 29/10)"},
+      {id:"n2",  date:"2026-11-06", desc:"UFRN - Homologação das inscrições"},
+      {id:"n3",  date:"2026-11-11", desc:"UFRN - Recurso de homologação (dias 09 a 11/11)"},
+      {id:"n4",  date:"2026-11-12", desc:"UFRN - Relação definitiva"},
+      {id:"n5",  date:"2026-11-27", desc:"UFRN - Submissão online do MPAP + RG (dias 16 a 27/11)"},
+      {id:"n6",  date:"2026-11-30", desc:"UFRN - Resultado da análise dos documentos"},
+      {id:"n7",  date:"2026-12-14", desc:"UFRN - Divulgação das comissões"},
+      {id:"n8",  date:"2026-12-17", desc:"UFRN - Impugnação das comissões (3 dias úteis)"},
+      {id:"n9",  date:"2027-02-21", desc:"UFRN - Prova Escrita"},
+      {id:"n10", date:"2027-03-21", desc:"UFRN - Prova Didática (22/02 a 21/03) e entrega do MPAP/título/currículo"},
+      {id:"n11", date:"2027-03-24", desc:"UFRN - Heteroidentificação (dias 22 a 24/03)"},
+      {id:"n12", date:"2027-03-25", desc:"UFRN - Resultado da heteroidentificação"},
+      {id:"n13", date:"2027-03-29", desc:"UFRN - Lista única (PPPIA)"},
+      {id:"n14", date:"2027-03-30", desc:"UFRN - Resultado final"}
     ];
   }
 
@@ -572,7 +558,6 @@
   var btnPrint = document.getElementById("btn-print");
   var fDate = document.getElementById("f-date");
   var fDesc = document.getElementById("f-desc");
-  var fCat = document.getElementById("f-cat");
   var fSave = document.getElementById("f-save");
   var fCancelWrap = document.getElementById("f-cancel-wrap");
   var fCancel = document.getElementById("f-cancel");
@@ -602,12 +587,7 @@
     info.className = "info";
     var desc = document.createElement("div");
     desc.className = "desc";
-    var cat = taskCategory(t);
-    var descText = t.desc;
-    if(cat && descText.toLowerCase().indexOf(cat.toLowerCase()) !== 0){
-      descText = cat + " - " + descText;
-    }
-    desc.textContent = descText;
+    desc.textContent = t.desc;
     var dateLine = document.createElement("div");
     dateLine.className = "date-line";
     dateLine.textContent = formatBR(t.date);
@@ -660,21 +640,14 @@
     return { active: false, test: function(){ return true; } };
   }
 
-  function taskCategory(t){
-    if(t.categoria) return t.categoria.toUpperCase();
-    var d = t.desc.toLowerCase();
-    if(d.indexOf("rural") !== -1) return "RURAL";
-    if(d.indexOf("ufrn") !== -1) return "UFRN";
-    return "";
-  }
-
-  function renderColumn(containerEl, emptyEl, categoryMatch, term, period){
+  function renderColumn(containerEl, emptyEl, groupFilterFn, term, period){
     var sorted = tasks.slice().sort(function(a,b){
       return a.date < b.date ? -1 : (a.date > b.date ? 1 : 0);
     });
     var filtered = sorted.filter(function(t){
-      if(!categoryMatch(t)) return false;
-      if(term && t.desc.toLowerCase().indexOf(term) === -1) return false;
+      var d = t.desc.toLowerCase();
+      if(!groupFilterFn(d)) return false;
+      if(term && d.indexOf(term) === -1) return false;
       if(!period.test(t)) return false;
       return true;
     });
@@ -689,8 +662,8 @@
   function render(){
     var term = (searchEl.value || "").trim().toLowerCase();
     var period = getPeriodFilter();
-    renderColumn(listRuralEl, emptyRuralEl, function(t){ return taskCategory(t) === "RURAL"; }, term, period);
-    renderColumn(listUfrnEl, emptyUfrnEl, function(t){ return taskCategory(t) === "UFRN"; }, term, period);
+    renderColumn(listRuralEl, emptyRuralEl, function(d){ return d.indexOf("rural") !== -1; }, term, period);
+    renderColumn(listUfrnEl, emptyUfrnEl, function(d){ return d.indexOf("ufrn") !== -1; }, term, period);
   }
 
   function startEdit(id){
@@ -698,7 +671,6 @@
     if(!t) return;
     editingId = id;
     fDate.value = t.date;
-    fCat.value = taskCategory(t) || "";
     fDesc.value = t.desc;
     fSave.textContent = "Salvar edição";
     formTitle.textContent = "Editando tarefa";
@@ -711,7 +683,6 @@
   function resetForm(){
     editingId = null;
     fDate.value = "";
-    fCat.value = "";
     fDesc.value = "";
     fSave.textContent = "Adicionar tarefa";
     formTitle.textContent = "Nova tarefa";
@@ -732,14 +703,9 @@
 
   fSave.addEventListener("click", function(){
     var dateVal = fDate.value;
-    var catVal = fCat.value;
     var descVal = fDesc.value.trim();
     if(!dateVal){
       setMsg("Informe uma data.", "err");
-      return;
-    }
-    if(!catVal){
-      setMsg("Selecione a categoria (RURAL ou UFRN).", "err");
       return;
     }
     if(!descVal){
@@ -750,12 +716,11 @@
       var t = tasks.find(function(x){ return x.id === editingId; });
       if(t){
         t.date = dateVal;
-        t.categoria = catVal;
         t.desc = descVal;
       }
       setMsg("Tarefa atualizada.", "ok");
     } else {
-      tasks.unshift({ id: genId(), date: dateVal, categoria: catVal, desc: descVal });
+      tasks.unshift({ id: genId(), date: dateVal, desc: descVal });
       setMsg("Tarefa adicionada.", "ok");
     }
     save(tasks);
